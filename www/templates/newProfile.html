@@ -1,0 +1,40 @@
+<ion-pane>
+    <ion-header-bar align-title="center" class="bar-positive">
+        <button class="button button-clear" ng-click="goBack()">
+            <i class="ion-arrow-left-c"></i> Back
+        </button>
+        <h1 class="title">New Profile</h1>
+        <a class="button button-stable" href="#/">Menu</a>
+    </ion-header-bar>
+    <ion-content class="padding has-header">
+        <div class="list">
+             <label class="item item-input">
+                <input type="text" placeholder="Name" ng-model="profileInfo.name">
+            </label>
+        </div> 
+        <div class="list">
+            <ion-radio name="profile" ng-model="profileInfo.type" ng-value="'bowler'">Bowler</ion-radio>
+            <ion-radio name="profile" ng-model="profileInfo.type" ng-value="'team'" ng-disabled="true">Team</ion-radio>
+        </div>
+         <div class="list">
+            <ion-radio name="hand" ng-model="profileInfo.hand" ng-value="'right'">Right Handed</ion-radio>
+            <ion-radio name="hand" ng-model="profileInfo.hand" ng-value="'left'">Left Handed</ion-radio>
+        </div>
+        <div class="list card">
+            <div class="item">
+                <h2>Profile Image</h2>
+            </div>
+            <div class="item item-image">
+                 <img ng-if="profileInfo.imgurl != ''" ng-src="{{urlForImage(profileInfo.imgurl)}}"/>
+            </div>
+            <div class="item item-divider text-center">
+                <button class="button button-energized" ng-click="addImage()">
+                    Change image
+                </button>
+            </div>
+        </div>
+        <div class="padding text-center">
+            <button class="button button-positive" ng-click="create()" style="width: 200px">Create Profile</button>
+        </div>        
+    </ion-content>
+</ion-pane>

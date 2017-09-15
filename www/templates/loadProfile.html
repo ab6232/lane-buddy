@@ -1,0 +1,27 @@
+<ion-pane>
+    <ion-header-bar align-title="center" class="bar-positive">
+        <button class="button button-clear" ng-click="goBack()">
+            <i class="ion-arrow-left-c"></i> Back
+        </button>
+        <h1 class="title">Load Profile</h1>
+        <a class="button button-stable" href="#/">Menu</a>
+    </ion-header-bar>
+    <ion-content class="padding has-header">
+        <ion-list>
+            <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="bowler in bowlers" type="item-text-wrap" ng-href="#/profile/{{bowler.bowlerid}}">
+                <img ng-src="{{urlForImage(bowler.img)}}">
+                <h2>{{bowler.name}}</h2>
+                <p>{{bowler.hand}} handed</p>
+                <i class="icon ion-chevron-right icon-accessory"></i>
+                <ion-option-button class="button-assertive" ng-click="delete(bowler.bowlerid)">
+                    Delete
+                </ion-option-button>
+            </ion-item>
+        </ion-list>
+        <div class="padding text-center">
+            <a class="button button-assertive" href="#/newProfile">
+                Add Bowler
+            </a>
+        </div>
+    </ion-content>
+</ion-pane>

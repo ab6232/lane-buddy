@@ -1,0 +1,30 @@
+<ion-pane>
+    <ion-header-bar align-title="center" class="bar-positive">
+        <button class="button button-clear" ng-click="goBack()">
+            <i class="ion-arrow-left-c"></i> Back
+        </button>
+        <h1 class="title">Bowler Profile</h1>
+        <a class="button button-stable" href="#/">Menu</a>
+    </ion-header-bar>
+    <ion-content class="padding has-header">
+        <div class="card">
+            <div class="item item-avatar">
+                <img src="{{urlForImage(bowler.img)}}">
+                <h2>{{bowler.name}}</h2>
+                <p>{{bowler.hand}} handed</p>
+            </div>
+            <div class="item item-text-wrap" ng-if="games.length">
+                <ul class="list">
+                    <li class="item" ng-repeat="game in games track by $index" ng-click="gameClick($index)">
+                        <h3>Game {{$index+1}} Score</h3>
+                        <span>{{game.score}}</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="item item-divider" ng-if="games.length">
+                <span>Average: {{average}}</span>
+            </div>
+        </div>
+        <button class="button button-positive" ng-click="newGame()">New Game</button>
+    </ion-content>
+</ion-pane>

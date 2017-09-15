@@ -1,0 +1,93 @@
+<ion-modal-view>
+    <ion-header-bar align-title="center" class="bar-positive">
+        <h1 class="title">Game Info</h1>
+    </ion-header-bar>
+    <ion-content class="padding has-header">
+        <div class="row">
+            <button class="button button-positive" ng-click="closeModal()">
+                Back
+            </button>
+            <div class="row viewGame">
+                <div class="col col-20 viewFrame" ng-repeat="frame in gameToShow track by $index" ng-if="$index<9"  >
+                    <div class="row viewFrameUpper">
+                        <div class="col col-60 viewFrameUpperLeft">
+                            <span ng-if="frame.shot1.length < 10 && frame.shot1.length">
+                                {{frame.shot1.length}}
+                            </span>
+                            <span ng-if="frame.shot1.length == 0">
+                                -
+                            </span>
+                        </div>
+                        <div class="col col-40 viewFrameBox">
+                            <span ng-if="frame.shot1.length == 10">
+                                X
+                            </span>
+                            <span ng-if="frame.shot1.length + frame.shot2.length == 10 && frame.shot2.length">
+                                /
+                            </span>
+                            <span ng-if="frame.shot2.length == 0 && frame.shot1.length != 10">
+                                -
+                            </span>
+                            <span ng-if="frame.shot1.length + frame.shot2.length < 10 && frame.shot2.length">
+                                {{frame.shot2.length}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row viewFrameLower">
+                        {{frame.score}}
+                    </div>
+                </div>
+                <div class="col col-20 viewFrame">
+                    <div class="row viewFrameUpper">
+                        <div class="col col-50 viewFrameUpperLeft">
+                            <span ng-if="gameToShow[9].shot1.length < 10 && gameToShow[9].shot1.length">
+                                {{gameToShow[9].shot1.length}}
+                            </span>
+                            <span ng-if="gameToShow[9].shot1.length == 10">
+                                X
+                            </span>
+                            <span ng-if="gameToShow[9].shot1.length == 0">
+                                -
+                            </span>
+                        </div>
+                        <div class="col col-50 viewFrameBox">                            
+                            <span ng-if="gameToShow[9].shot1.length + gameToShow[9].shot2.length == 10 && gameToShow[9].shot2.length">
+                                /
+                            </span>
+                            <span ng-if="gameToShow[9].shot1.length + gameToShow[9].shot2.length < 10 && gameToShow[9].shot2.length">
+                                {{gameToShow[9].shot2.length}}
+                            </span>
+                            <span ng-if="gameToShow[9].shot2.length == 0 && gameToShow[9].shot1.length != 10">
+                                -
+                            </span>
+                            <span ng-if="gameToShow[9].bonus1.length && gameToShow[9].bonus1.length<10">
+                                {{gameToShow[9].bonus1.length}}
+                            </span>
+                            <span ng-if="gameToShow[9].bonus1.length==10">
+                                x
+                            </span>
+                            <span ng-if="gameToShow[9].bonus1.length == 0 && gameToShow[9].shot1.length == 10">
+                                -
+                            </span>
+                            <span ng-if="gameToShow[9].bonus2.length && gameToShow[9].bonus2.length<10 && gameToShow[9].bonus2.length + gameToShow[9].bonus1.length!=10">
+                                {{gameToShow[9].bonus2.length}}
+                            </span>
+                            <span ng-if="gameToShow[9].bonus2.length==10 && (gameToShow[9].bonus1.length==10 || gameToShow[9].shot2.length)">
+                                x
+                            </span>
+                            <span ng-if="gameToShow[9].bonus2.length == 0 &&  (gameToShow[9].bonus1.length||gameToShow[9].shot1.length + gameToShow[9].shot2.length == 10)">
+                                -
+                            </span>
+                            <span ng-if="gameToShow[9].bonus2.length + gameToShow[9].bonus1.length==10 && gameToShow[9].bonus1.length!=10 && gameToShow[9].shot2.length==0 ">
+                                /
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row viewFrameLower">
+                        {{gameToShow[9].score}}
+                    </div>
+                </div>
+            </div>
+        </div>   
+    </ion-content>
+</ion-modal-view>

@@ -1,0 +1,125 @@
+<ion-pane>
+    <ion-header-bar align-title="center" class="bar-positive">
+        <button class="button button-clear" ng-click="goBack()">
+            <i class="ion-arrow-left-c"></i> Back
+        </button>
+        <h1 class="title">{{bowler.name}}</h1>
+        <a class="button button-stable" href="#/">Menu</a>
+    </ion-header-bar>
+    <ion-content class="padding has-header">
+        <div class="game">
+            <div class="row frame-row">
+                <div class="col col-20 frame" ng-repeat="frame in game track by $index" ng-if="$index<9"  >
+                    <div class="row upper-frame text-center">
+                        <div class="col col-60 upper-frame-left">
+                            <span ng-if="frame.shot1.length < 10 && frame.shot1.length">
+                                {{frame.shot1.length}}
+                            </span>
+                            <span ng-if="frame.shot1.length == 0 && ((frameNum == frame.frame && shot == 2)||frameNum > frame.frame)">
+                                -
+                            </span>
+                        </div>
+                        <div class="col col-40 upper-frame-box">
+                            <span ng-if="frame.shot1.length == 10">
+                                X
+                            </span>
+                            <span ng-if="frame.shot1.length + frame.shot2.length == 10 && frame.shot2.length">
+                                /
+                            </span>
+                            <span ng-if="frame.shot2.length == 0 && (frameNum > frame.frame) && frame.shot1.length != 10">
+                                -
+                            </span>
+                            <span ng-if="frame.shot1.length + frame.shot2.length < 10 && frame.shot2.length">
+                                {{frame.shot2.length}}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row lower-frame">
+                        {{frame.score}}
+                    </div>
+                </div>
+                <div class="col col-20 frame"  ng-click="frameClick('10')">
+                    <div class="row upper-frame">
+                        <div class="col col-50 upper-frame-left">
+                            <span ng-if="game[9].shot1.length < 10 && game[9].shot1.length">
+                                {{game[9].shot1.length}}
+                            </span>
+                            <span ng-if="game[9].shot1.length == 10">
+                                X
+                            </span>
+                            <span ng-if="game[9].shot1.length == 0 && frameNum == 10 && shot != 1">
+                                -
+                            </span>
+                        </div>
+                        <div class="col col-50 upper-frame-box">                            
+                            <span ng-if="game[9].shot1.length + game[9].shot2.length == 10 && game[9].shot2.length">
+                                /
+                            </span>
+                            <span ng-if="game[9].shot1.length + game[9].shot2.length < 10 && game[9].shot2.length">
+                                {{game[9].shot2.length}}
+                            </span>
+                            <span ng-if="game[9].shot2.length == 0 && game[9].shot1.length != 10 && frameNum == 10 && shot == 'done'">
+                                -
+                            </span>
+                            <span ng-if="game[9].bonus1.length && game[9].bonus1.length<10">
+                                {{game[9].bonus1.length}}
+                            </span>
+                            <span ng-if="game[9].bonus1.length && game[9].bonus1.length==10">
+                                x
+                            </span>
+                            <span ng-if="game[9].bonus1.length == 0 && game[9].shot1.length == 10 && frameNum == 10 && (shot == 'bonus2' || shot=='done')">
+                                -
+                            </span>
+                            <span ng-if="game[9].bonus2.length && game[9].bonus2.length<10 && game[9].bonus2.length + game[9].bonus1.length!=10">
+                                {{game[9].bonus2.length}}
+                            </span>
+                            <span ng-if="game[9].bonus2.length==10 && (game[9].bonus1.length==10 || game[9].shot2.length)">
+                                x
+                            </span>
+                            <span ng-if="game[9].bonus2.length == 0 && frameNum == 10 && shot == 'done' && (game[9].bonus1.length||game[9].shot1.length + game[9].shot2.length == 10)">
+                                -
+                            </span>
+                            <span ng-if="game[9].bonus2.length + game[9].bonus1.length==10 && game[9].bonus1.length!=10 && game[9].shot2.length==0 && shot=='done'">
+                                /
+                            </span>
+                        </div>
+                    </div>
+                    <div class="row lower-frame">
+                        {{game[9].score}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pins">
+            <div class="row">
+                <div class="col col-100 text-center">
+                    <button ng-click="mark()" ng-if="shot==1 || shot=='bonus1' || (shot=='bonus2' && (game[9].bonus1.length==10||(game[9].bonus1.length==0&&game[9].shot1.length!=10)))" class="button button-royal">
+                        Strike!
+                    </button>
+                    <button ng-click="mark()" ng-if="shot==2 || (shot=='bonus2' && game[9].bonus1.length<10 && (game[9].bonus1.length || game[9].shot1.length==10))" class="button button-energized">
+                        Spare!
+                    </button>
+                </div>                
+            </div>
+            <div class="row">
+                <div ng-repeat="pin in pinInfo" class="col {{pin.col}}">
+                    <img ng-click="pinClick(pin)" ng-if="pin.pin != '2' && pin.pin != '3'" ng-src="img/pin_{{pin.down}}_{{pin.pin}}.png" style="width: 50px; height: 50px"/>
+                    <img ng-click="pinClick(pin)" ng-if="pin.pin == '2' || pin.pin == '3'" ng-src="img/pin_{{pin.down}}_{{pin.pin}}.png" style="width: 50px; height: 50px; margin: 5%;"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-100 text-center" style="margin-top: 10%;">
+                    <button class="button button-positive" style="width: 50%" ng-click="submitShot()" ng-if="shot != 'done'">
+                        Submit Shot
+                    </button>
+                    <button class="button button-positive" style="width: 50%"  ng-if="shot == 'done' && quickGame == true" ng-click="clearGame()">
+                        Finished! Clear Game!
+                    </button>
+                    <button class="button button-positive" style="width: 50%"  ng-if="shot == 'done' && quickGame == false" ng-click="endGame()">
+                        Finished! End Game!
+                    </button>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-pane>

@@ -1,0 +1,44 @@
+.frame, .viewFrame{
+    border-style: solid;
+    border-width: 1px;
+    height: 100%;
+    padding: 0px !important;
+}
+.viewGame{}
+.game{
+    height: 30%;
+}
+.pins{
+    height: 70%;
+}
+.frame-row{
+    height: 50%;
+}
+
+.upper-frame, .viewFrameUpper{
+    height: 40%;
+    padding: 0px !important;
+}
+.lower-frame, .viewFrameLower{
+    height: 60%;
+}
+.upper-frame-left, .viewFrameUpperLeft{
+    height: 100%;
+}
+.upper-frame-box, .viewFrameBox{
+    height: 100%;
+    border-style: solid;
+    border-width: 1px;
+    padding: 0px !important;
+}
+.row{
+  flex-wrap: wrap;
+}
+ion-content{
+    background-color: #6a9dd4;
+}
+
+.homePage .button{
+    width: 50%;
+    margin: 5%;
+}

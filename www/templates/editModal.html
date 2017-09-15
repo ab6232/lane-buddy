@@ -1,0 +1,37 @@
+<ion-modal-view>
+    <ion-header-bar align-title="center" class="bar-positive">
+        <h1 class="title">Edit Frame {{frameToEdit+1}}</h1>
+    </ion-header-bar>
+    <ion-content class="padding has-header">
+        <div class="row">
+            <button class="button button-positive" ng-click="closeModal()">
+                Back
+            </button>
+        </div>
+        <div class="row" style="height: 80%">
+            <div class="col col-100">
+                <div class="row text-center">
+                    <div class="col col-50">
+                        <span ng-if="game[frameToEdit].shot1.length < 10 && game[frameToEdit].shot1.length">
+                            {{game[frameToEdit].shot1.length}}
+                        </span>
+                        <span ng-if="game[frameToEdit].shot1.length == 10">
+                            X
+                        </span>
+                    </div>
+                    <div class="col col-50">                        
+                        <span ng-if="game[frameToEdit].shot1.length + game[frameToEdit].shot2.length == 10 && game[frameToEdit].shot2.length">
+                            /
+                        </span>
+                        <span ng-if="game[frameToEdit].shot1.length + game[frameToEdit].shot2.length < 10 && game[frameToEdit].shot2.length">
+                            {{game[frameToEdit].shot2.length}}
+                        </span>
+                    </div>
+                </div>
+                <div class="row">
+                    {{game[frameToEdit].score}}
+                </div>
+            </div>
+        </div>        
+    </ion-content>
+</ion-modal-view>
